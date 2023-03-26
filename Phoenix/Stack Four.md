@@ -51,11 +51,11 @@ The buffer is still 64 bytes long, so we can pad that buffer and append the retu
 
 Much like before, find the address of complete_level so we know where we want it to return to.
 
-![[../res/Pasted image 20230323210945.png]]
+![](_attachments/Pasted%20image%2020230323210945.png)
 
 In this case, on this VM, its `0x40061d`
 
-![[../res/Pasted image 20230323212156.png]]
+![](_attachments/Pasted%20image%2020230323212156.png)
 
 I opened it in GDB to check if the buffer is properly sized for 64 bytes.. but its not.
 In this case the `sub rsp, 0x50` is actually 80 bytes of space being allocated on the stack for variables. This is  to account for the 64 byte `buffer` and the 8 bytes (64-bit) for the `void * ret` The astute probably notice that this  leaves us with 72 bytes of space for variables, but why is it leaving room for another 8 bytes.. perhaps stack alignment or something like that.
@@ -66,7 +66,7 @@ On further inspection, the HINTS section of the instructions indicate that this 
 
 But if we crash the program within gdb and have a read we should see the exact length we need to overwrite rip:
 
-![[../res/Pasted image 20230323212858.png]]
+![](_attachments/Pasted%20image%2020230323212858.png)
 
 Now we just plug the proper values into our python script from before:
 
@@ -93,7 +93,7 @@ python -c 'from pwn import *; out = "A"*80; out += "B"*8; out += p64(0x40061d); 
 ```
 
 
-![[../res/Pasted image 20230323213243.png]]
+![](_attachments/Pasted%20image%2020230323213243.png)
 
 # Other options / patterns
 
@@ -101,9 +101,9 @@ You could use programs like `pattern_create.rb` and `pattern_offset.rb` to figur
 GEF itself provides fuzzers/pattern creators to fill this purpose:
 
 Pattern Create
-![[../res/Pasted image 20230323213657.png]]
+![](_attachments/Pasted%20image%2020230323213657.png)
 
 Pattern Offset
-![[../res/Pasted image 20230323213817.png]]
+![](_attachments/Pasted%20image%2020230323213817.png)
 
 

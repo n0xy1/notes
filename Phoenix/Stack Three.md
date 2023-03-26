@@ -58,7 +58,7 @@ Much like the previous challenges, the buffer is filled with user input. Except 
 
 To find the address of `complete_level()` we can use the program `objdump`
 
-![[../res/Pasted image 20230323205853.png]]
+![](_attachments/Pasted%20image%2020230323205853.png)
 
 Python3 HATES printing raw bytes to stdout, so this is where I use `pwntools` to make this easy as hell:
 
@@ -82,4 +82,4 @@ print(out)
 
 The magic here is in the p64() function. It automatically turns the address into a proper little endian 64-bit address.. it saves us having to manually write out `\x9d\x06\x40\x00\x00\x00\x00\x00` and manually figure a way for python3 to print raw bytes (which is why bad devs stuck with python2 for ages)
 
-![[../res/Pasted image 20230324144055.png]]
+![](_attachments/Pasted%20image%2020230324144055.png)

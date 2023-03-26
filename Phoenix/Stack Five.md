@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
 
 Use pattern create and feed in the data to crash the program
 
-![[../res/Pasted image 20230324141500.png]]
+![](_attachments/Pasted%20image%2020230324141500.png)
 
 Not too sure what the goal is here, if its just to run shellcode, then we can write a simple hello world in assembly to demonstrate this process.
 
@@ -71,7 +71,7 @@ In order to debug this, use the syntax ` r <<< $(python ~/s5.py)` within gdb.
 
 You will see once the fuction attempts to return from start_level(), it ends up in your nop sled.
 
-![[res/Pasted image 20230324144055.png]]
+![](_attachments/Pasted%20image%2020230324144055.png)
 
 Now we just need to craft some proper shellcode, and be on our way:
 

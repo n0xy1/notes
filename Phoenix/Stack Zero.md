@@ -74,7 +74,7 @@ A = 0x41, B = 0x42.
 Whack it open in gdb, step to the main function and you see where it allocates the stack for the locals in the disassembly window:
 
 
-![[../res/Pasted image 20230319181047.png]]
+![](_attachments/Pasted%20image%2020230319181047.png)
 
 Asyou can see, I have stepped past the instruction that subtracts 0x60 from $rsp (grows the stack) and now the stack pointer is pointing to the address `0x..e5d0`
 
@@ -84,18 +84,18 @@ The extra space (`0x60` = 96 bytes) could have been allocated by the compiler so
 
 Stepping through the solution after I've overflowed the buffer and corrupted the `changeme` variable shows its now got a B in it:
 
-![[../res/Pasted image 20230319183017.png]]
+![](_attachments/Pasted%20image%2020230319183017.png)
 
 
 The upper two arrows point to the `mov` and `test` instructions, these are basically the equivalents of `if somevar == 0`
 
 TEST will set the zero flag if the register is zero, in this case its NOT zero, so the ZF never gets set:
 
-![[../res/Pasted image 20230319183621.png]]
+![](_attachments/Pasted%20image%2020230319183621.png)
 
 Let the program continue, and theres your answer
 
-![[../res/Pasted image 20230319183726.png]]
+![](_attachments/Pasted%20image%2020230319183726.png)
 
 # Summary
 
