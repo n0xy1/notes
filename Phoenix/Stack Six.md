@@ -61,3 +61,21 @@ int main(int argc, char **argv) {
 
 # Solution
 
+We can fill up the buffer and overflow a single byte after the `strdup`
+
+![](_attachments/Pasted%20image%2020230402100358.png)
+
+![](_attachments/Pasted%20image%2020230402100321.png)
+
+Perhaps we can manipulate this overflow to point back to the top of our stack, specifically targeting `0x7fffffffec40`
+
+For this to work whats the ascii char for 0x40?
+
+![](_attachments/Pasted%20image%2020230402100619.png)
+
+Change the payload to `A * 126 + @`
+
+![](_attachments/Pasted%20image%2020230402100830.png)`
+
+
+However this time the stacks been shifted.. 
