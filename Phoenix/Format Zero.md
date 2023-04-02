@@ -66,7 +66,8 @@ so `%x` does 8 characters.. to fill the buffer and overwrite changeme we could d
 
 lets have a look
 
+![](_attachments/Pasted%20image%2020230402121233.png)
 
-or just a single %32x
+Looks like that works, lets try without gdb.
 
-![](_attachments/Pasted%20image%2020230402121135.png)
+![](_attachments/Pasted%20image%2020230402121312.png)
