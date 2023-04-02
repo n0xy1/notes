@@ -76,4 +76,21 @@ To find that, I used the following steps:
 I had to add 0x10 to the address, to skip the `ExploitEducation=` prefix, which leaves us with the address:
 `0x0x7fffffffef5b`
 
-So when we return, we need to see if our 
+Because we can manipulate the last byte of the "buffer"/return address, lets check if our code is somwhere within this range `0x0x7fffffffef00 - 0x0x7fffffffefff`:
+![](_attachments/Pasted%20image%2020230402102737.png)
+So when we return, we need to see if we can manipulate the address to be ef60. This will jump to our shellcode, probably should include a couple of nop's to make it line up correctly and then some real shellcode. 
+
+![](_attachments/Pasted%20image%2020230402103059.png)
+
+You can see we changed to value of RBP to `0x..60`, this is with the character backtick character.
+
+Lets mod the shellcode to be `\x90 * 126 + \x60`
+
+```python
+from pwn import *
+
+buf = b"\x90" * 126 + "\x60"
+
+print(buf)
+```
+
