@@ -131,3 +131,8 @@ Within GDB, the  _ environment variable is different.. causing different it to b
 
 I now have to go through and re-find all of the memory addresses and offsets :/
 
+![](_attachments/Pasted%20image%2020230402115544.png)
+
+After changing some env variables, and running with absolute paths as well as setting .gdbinit stuff i still get different memory addreses.
+
+Brute foricing the way through till be land in the shell code is a pain in the ass.
