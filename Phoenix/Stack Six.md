@@ -118,3 +118,16 @@ print(payload)
 So now when we run the program, it jumps into our shellcode
 
 ![](_attachments/Pasted%20image%2020230402112619.png)
+
+However when running the program for real, we get a segfault.. probably due to changing environment variables and such, lets check it
+
+![](_attachments/Pasted%20image%2020230402113510.png)
+![](_attachments/Pasted%20image%2020230402113538.png)
+
+Within GDB, the  _ environment variable is different.. causing different it to be at different memory addresses. Lets fix it up within gdb.
+
+![](_attachments/Pasted%20image%2020230402113716.png)
+
+
+I now have to go through and re-find all of the memory addresses and offsets :/
+
