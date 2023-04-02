@@ -67,15 +67,13 @@ We can fill up the buffer and overflow a single byte after the `strdup`
 
 ![](_attachments/Pasted%20image%2020230402100321.png)
 
-Perhaps we can manipulate this overflow to point back to the top of our stack, specifically targeting `0x7fffffffec40`
+Perhaps we can manipulate this overflow to point back to the address of our environment variable
 
-For this to work whats the ascii char for 0x40?
+To find that, I used the following steps:
 
-![](_attachments/Pasted%20image%2020230402100619.png)
+![](_attachments/Pasted%20image%2020230402102339.png)
 
-Change the payload to `A * 126 + @`
+I had to add 0x10 to the address, to skip the `ExploitEducation=` prefix, which leaves us with the address:
+`0x0x7fffffffef5b`
 
-![](_attachments/Pasted%20image%2020230402100830.png)`
-
-
-However this time the stacks been shifted.. 
+So when we return, we need to see if our 
